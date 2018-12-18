@@ -13,6 +13,8 @@
 		53054B6F21C88613002AD871 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53054B6E21C88613002AD871 /* Assets.xcassets */; };
 		53054B7221C88613002AD871 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53054B7021C88613002AD871 /* LaunchScreen.storyboard */; };
 		53054B7521C88613002AD871 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 53054B7421C88613002AD871 /* main.m */; };
+		53054B7E21C8872F002AD871 /* SKPrinterLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 53054B7D21C8872F002AD871 /* SKPrinterLog.m */; };
+		53054B8121C88BDB002AD871 /* SKFileLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 53054B8021C88BDB002AD871 /* SKFileLog.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,12 @@
 		53054B7121C88613002AD871 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		53054B7321C88613002AD871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53054B7421C88613002AD871 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		53054B7B21C8862E002AD871 /* SKLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKLog.h; sourceTree = "<group>"; };
+		53054B7C21C8872F002AD871 /* SKPrinterLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPrinterLog.h; sourceTree = "<group>"; };
+		53054B7D21C8872F002AD871 /* SKPrinterLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKPrinterLog.m; sourceTree = "<group>"; };
+		53054B7F21C88BDB002AD871 /* SKFileLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKFileLog.h; sourceTree = "<group>"; };
+		53054B8021C88BDB002AD871 /* SKFileLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SKFileLog.m; sourceTree = "<group>"; };
+		53054B8521C893FB002AD871 /* SKLogHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKLogHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,7 @@
 		53054B6421C88612002AD871 /* SKLog */ = {
 			isa = PBXGroup;
 			children = (
+				53054B8421C893D8002AD871 /* SKLog */,
 				53054B6521C88612002AD871 /* AppDelegate.h */,
 				53054B6621C88612002AD871 /* AppDelegate.m */,
 				53054B6821C88612002AD871 /* ViewController.h */,
@@ -67,6 +76,19 @@
 				53054B7021C88613002AD871 /* LaunchScreen.storyboard */,
 				53054B7321C88613002AD871 /* Info.plist */,
 				53054B7421C88613002AD871 /* main.m */,
+			);
+			path = SKLog;
+			sourceTree = "<group>";
+		};
+		53054B8421C893D8002AD871 /* SKLog */ = {
+			isa = PBXGroup;
+			children = (
+				53054B7B21C8862E002AD871 /* SKLog.h */,
+				53054B7F21C88BDB002AD871 /* SKFileLog.h */,
+				53054B8021C88BDB002AD871 /* SKFileLog.m */,
+				53054B7C21C8872F002AD871 /* SKPrinterLog.h */,
+				53054B7D21C8872F002AD871 /* SKPrinterLog.m */,
+				53054B8521C893FB002AD871 /* SKLogHeader.h */,
 			);
 			path = SKLog;
 			sourceTree = "<group>";
@@ -142,7 +164,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				53054B6A21C88612002AD871 /* ViewController.m in Sources */,
+				53054B7E21C8872F002AD871 /* SKPrinterLog.m in Sources */,
 				53054B7521C88613002AD871 /* main.m in Sources */,
+				53054B8121C88BDB002AD871 /* SKFileLog.m in Sources */,
 				53054B6721C88612002AD871 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
