@@ -8,9 +8,13 @@
 
 #import "SKFileLog.h"
 #import "SKLog.h"
-@interface SKFileLog()
+@interface SKFileLog(){
+    dispatch_semaphore_t _semaphore;
+    NSDateFormatter * _dateFormatter;
+}
 @property(strong, nonatomic) NSFileHandle * handle;
 @property(assign, nonatomic) BOOL enablePrinter;
+    @property(assign, nonatomic) BOOL enableForcePrinter;
 @end
 @implementation SKFileLog
 
@@ -30,11 +34,14 @@
 }
 -(instancetype)init{
     if (self = [super init]) {
-        
+        _semaphore = dispatch_semaphore_create(1);
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateFormat = @"yyyy-MM-dd-H";
     }
     return self;
 }
 - (void)log:(LogType)logType tag:(NSString *)tag info:(id)info{
+    dispatch_wait(_semaphore, DISPATCH_TIME_FOREVER);
     NSString * log = @"debug";
     switch (logType) {
         case LogTypeInfo:
@@ -54,13 +61,19 @@
         default:
             break;
     }
+#if TARGET_IPHONE_SIMULATOR
     NSLog(@"%@ : %@ => %@\n",log, tag, info);
-    if (self.enablePrinter) {
-        
+#else
+    if (self.enableForcePrinter) {
+        NSLog(@"%@ : %@ => %@\n",log, tag, info);
     }
+#endif
+   
+   
     NSString * content = [NSString stringWithFormat:@"%@ %@ : %@ => %@\n", [NSDate date],log, tag, info];
     NSFileManager * manager = [NSFileManager defaultManager];
-    NSString * path = [@[NSHomeDirectory(), @"Documents",@"SKLog"] componentsJoinedByString:@"/"];
+    NSDate * date = [NSDate date];
+    NSString * path = [@[NSHomeDirectory(), @"Documents",@"SKLog",[_dateFormatter stringFromDate:date]] componentsJoinedByString:@"/"];
     if (![manager fileExistsAtPath:path]) {
         [manager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
         path = [@[path ,@"log.txt"] componentsJoinedByString:@"/"];
@@ -76,7 +89,7 @@
     [ self.handle seekToEndOfFile];
     [ self.handle writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
     [ self.handle synchronizeFile];
- 
+    dispatch_semaphore_signal(_semaphore);
 }
 -(void)debug:(NSString *)tag withInfo:(id)info{
     id<SKLog> skLog = self;
@@ -101,4 +114,7 @@
     }
     self.handle = nil;
 }
+    -(void)forcePrinterLog{
+        self.enableForcePrinter = YES;
+    }
 @end
